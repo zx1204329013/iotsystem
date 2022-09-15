@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 负责接收EMQX服务器端的数据
+ */
 @Slf4j
 @RestController
 @RequestMapping("/emqx/webhook")
@@ -24,7 +27,7 @@ public class EmqxWebHook {
      */
     @PostMapping("/tempAndHum")
     public String getTempAndHum(@RequestBody TempAndHum tempAndHum){
-        log.info(tempAndHum.toString());
+        log.info("接收到EMQX服务器数据："+ tempAndHum.toString());
         //发送事件，让监听器获取后进行数据存储、webSocket
         publisher.publishEvent(new TempAndHumEvent(this , tempAndHum));
         return null;

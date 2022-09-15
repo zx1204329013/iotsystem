@@ -2,6 +2,7 @@ package com.inmeasure.websocket.listener;
 
 import com.inmeasure.common.event.TempAndHumEvent;
 import com.inmeasure.emqx.domain.TempAndHum;
+import com.inmeasure.websocket.service.TempHumWebSocketService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -14,5 +15,6 @@ public class TempAndHumListener4Push implements ApplicationListener<TempAndHumEv
         TempAndHum tempAndHum = event.getTempAndHum();
         String s = tempAndHum.toString();
         System.out.println("推送消息监听器监听到消息：" + s);
+        TempHumWebSocketService.sendInfo(tempAndHum);
     }
 }

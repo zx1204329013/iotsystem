@@ -8,6 +8,7 @@ import com.inmeasure.storage.domain.TempHumData;
 import com.inmeasure.storage.domain.TempHumMgt;
 import com.inmeasure.storage.service.TempHumDataService;
 import com.inmeasure.storage.service.TempHumMgtService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -15,7 +16,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Slf4j
 @Component
 public class TempAndHumListener4Save implements ApplicationListener<TempAndHumEvent> {
     @Autowired
@@ -30,6 +31,7 @@ public class TempAndHumListener4Save implements ApplicationListener<TempAndHumEv
     @Async("taskExecutor")
     @Transactional
     public void onApplicationEvent(TempAndHumEvent event) {
+        log.info("温度传感器监听器：" + event.toString());
         TempAndHum tempAndHum = event.getTempAndHum();
         TempHumMgt tempHumMgt = new TempHumMgt();
         TempHumData tempAndHumData = new TempHumData();
