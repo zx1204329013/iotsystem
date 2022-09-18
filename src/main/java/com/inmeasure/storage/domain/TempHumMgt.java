@@ -20,6 +20,6 @@ public class TempHumMgt {
     private Long deviceId;
     private String deviceType;
     private String deviceLocation;
-    private String deviceStatus;
+    private Integer deviceStatus;
 
 }

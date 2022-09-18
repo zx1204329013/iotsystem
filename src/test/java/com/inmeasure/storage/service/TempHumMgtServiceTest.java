@@ -17,7 +17,7 @@ public class TempHumMgtServiceTest {
     private TempHumMgtService tempHumMgtService;
     @Test
     public void insert() throws ParseException {
-        TempHumMgt tempAndHumMgt = new TempHumMgt("2022-09-13 22:12:10.270", new Long(1002), "SHT20", "西安长安区", "正常");
+        TempHumMgt tempAndHumMgt = new TempHumMgt("2022-09-13 22:12:10.270", new Long(1002), "SHT20", "西安长安区", 3);
         boolean save = tempHumMgtService.save(tempAndHumMgt);
     }
 
