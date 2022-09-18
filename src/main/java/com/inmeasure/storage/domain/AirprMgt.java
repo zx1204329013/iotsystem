@@ -1,23 +1,20 @@
-package com.inmeasure.emqx.domain;
+package com.inmeasure.storage.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class TempAndHum {
+@NoArgsConstructor
+public class AirprMgt {
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     private String createTime;
+    @TableId
     private Long deviceId;
     private String deviceType;
     private String deviceLocation;
     private Integer deviceStatus;
-    private Double tempVal;
-    private Double humVal;
+
 }
