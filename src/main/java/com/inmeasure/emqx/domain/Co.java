@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AirPr {
+public class Co {
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     private String createTime;
     private Long deviceId;
     private String deviceType;
     private String deviceLocation;
     private Integer deviceStatus;
-    private Double airprVal;
+    private Double coVal;
 }
