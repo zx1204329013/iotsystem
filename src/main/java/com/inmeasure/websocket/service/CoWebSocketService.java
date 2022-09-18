@@ -2,7 +2,7 @@ package com.inmeasure.websocket.service;
 
 import com.alibaba.fastjson.JSON;
 import com.inmeasure.emqx.domain.AirPr;
-import com.inmeasure.emqx.domain.TempAndHum;
+import com.inmeasure.emqx.domain.Co;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.yeauty.annotation.*;
@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Component
-@ServerEndpoint(path = "/webSocket/airPr/{deviceId}")
-public class AirPrWebSocketService {
+@ServerEndpoint(path = "/webSocket/co/{deviceId}")
+public class CoWebSocketService {
     /**
      * 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
      */
@@ -21,7 +21,7 @@ public class AirPrWebSocketService {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的TempHumWebSocketService对象。
      */
-    private static ConcurrentHashMap<Long, AirPrWebSocketService> webSocketMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<Long, CoWebSocketService> webSocketMap = new ConcurrentHashMap<>();
     /**
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
@@ -95,18 +95,18 @@ public class AirPrWebSocketService {
 
     /**
      * 服务器向特定客户端发送自定义消息
-     * @param airPr
+     * @param co
      */
-    public static void sendInfo(AirPr airPr) {
-        Long deviceId = airPr.getDeviceId();
+    public static void sendInfo(Co co) {
+        Long deviceId = co.getDeviceId();
         //判断当前设备显示端是否已经建立连接
         if (deviceId != null && webSocketMap.containsKey(deviceId)) {
             //从Map中获取当前设备id对应的TempHumWebSocketService对象
-            AirPrWebSocketService airPrWebSocketService = webSocketMap.get(deviceId);
+            CoWebSocketService coWebSocketService = webSocketMap.get(deviceId);
             //将消息对象转成json字符串
-            String msg = JSON.toJSONString(airPr);
+            String msg = JSON.toJSONString(co);
             //获取当前设备id对应的session对象，并发送消息
-            airPrWebSocketService.session.sendText(msg);
+            coWebSocketService.session.sendText(msg);
         } else {
             log.error("设备显示端：" + deviceId + "未连接");
         }
@@ -118,11 +118,11 @@ public class AirPrWebSocketService {
     }
 
     public static synchronized void addOnlineCount() {
-        AirPrWebSocketService.onlineCount++;
+        CoWebSocketService.onlineCount++;
     }
 
     public static synchronized void subOnlineCount() {
-        AirPrWebSocketService.onlineCount--;
+        CoWebSocketService.onlineCount--;
     }
 
 }
