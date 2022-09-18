@@ -1,6 +1,7 @@
 package com.inmeasure.emqx.controller;
 
 import com.inmeasure.common.event.AirprEvent;
+import com.inmeasure.common.event.CoEvent;
 import com.inmeasure.common.event.TempAndHumEvent;
 import com.inmeasure.emqx.domain.AirPr;
 import com.inmeasure.emqx.domain.Co;
@@ -56,7 +57,7 @@ public class EmqxWebHook {
     public String getCo(@RequestBody Co co){
         log.info("接收到EMQX服务器数据："+ co.toString());
         //发送事件，让监听器获取后进行数据存储、webSocket
-        //publisher.publishEvent(new AirprEvent(this , airPr));
+        publisher.publishEvent(new CoEvent(this , co));
         return null;
     }
 }

@@ -5,7 +5,7 @@ import com.inmeasure.emqx.domain.TempAndHum;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * 保存温湿度传感器类的事件
+ * 保存气压传感器类的事件
  */
 
 public class AirprEvent extends ApplicationEvent {
