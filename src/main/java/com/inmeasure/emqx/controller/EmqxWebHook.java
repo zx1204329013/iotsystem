@@ -101,4 +101,16 @@ public class EmqxWebHook {
         publisher.publishEvent(new WsEvent(this , ws));
         return null;
     }
+
+    /**
+     * 获取水质传感器数据
+     * @param ph
+     * @return
+     */
+    @PostMapping("/ph")
+    public String getPh(@RequestBody Ph ph){
+        //发送事件，让监听器获取后进行数据存储、webSocket
+        publisher.publishEvent(new PhEvent(this , ph));
+        return null;
+    }
 }
