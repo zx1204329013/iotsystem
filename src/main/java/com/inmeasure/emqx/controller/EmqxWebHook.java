@@ -77,4 +77,16 @@ public class EmqxWebHook {
         publisher.publishEvent(new RainfallEvent(this , rainfall));
         return null;
     }
+
+    /**
+     * 获取空气质量传感器（co2、voc）数据
+     * @param co2AndVoc
+     * @return
+     */
+    @PostMapping("/co2AndVoc")
+    public String getCo2AndVoc(@RequestBody Co2AndVoc co2AndVoc){
+        //发送事件，让监听器获取后进行数据存储、webSocket
+        publisher.publishEvent(new Co2AndVocEvent(this , co2AndVoc));
+        return null;
+    }
 }
