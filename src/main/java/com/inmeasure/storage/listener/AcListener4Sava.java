@@ -29,7 +29,7 @@ public class AcListener4Sava implements ApplicationListener<AcEvent> {
     private AcDataService acDataService;
 
     /**
-     * 监听到气压传感器数据后，将设备信息以及设备气压数据保存至对应表中
+     * 监听到加速度传感器数据后，将设备信息以及设备气压数据保存至对应表中
      * @param event
      */
     @Async("taskExecutor")
