@@ -33,7 +33,6 @@ public class AirprListener4Sava implements ApplicationListener<AirprEvent> {
     @Async("taskExecutor")
     @Transactional
     public void onApplicationEvent(AirprEvent event) {
-        log.info("气压传感器器消息存储监听器：" + event.toString());
         AirPr airPr = event.getAirPr();
         AirprData airprData = new AirprData();
         AirprMgt airprMgt = new AirprMgt();

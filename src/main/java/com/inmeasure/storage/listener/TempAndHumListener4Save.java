@@ -31,7 +31,6 @@ public class TempAndHumListener4Save implements ApplicationListener<TempAndHumEv
     @Async("taskExecutor")
     @Transactional
     public void onApplicationEvent(TempAndHumEvent event) {
-        log.info("温度传感器监听器：" + event.toString());
         TempAndHum tempAndHum = event.getTempAndHum();
         TempHumMgt tempHumMgt = new TempHumMgt();
         TempHumData tempAndHumData = new TempHumData();

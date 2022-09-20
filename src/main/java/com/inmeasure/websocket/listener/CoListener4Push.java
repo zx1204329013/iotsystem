@@ -25,8 +25,6 @@ public class CoListener4Push implements ApplicationListener<CoEvent> {
     @Async("taskExecutor")
     public void onApplicationEvent(CoEvent event) {
         Co co = event.getCo();
-        String s = co.toString();
-        log.info("二氧化碳传感器器消息推送监听器：" + s);
         CoWebSocketService.sendInfo(co);
     }
 }

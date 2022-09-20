@@ -35,7 +35,6 @@ public class CoListener4Sava implements ApplicationListener<CoEvent> {
     @Async("taskExecutor")
     @Transactional
     public void onApplicationEvent(CoEvent event) {
-        log.info("二氧化碳传感器消息存储监听器：" + event.getCo().toString());
         Co co = event.getCo();
         CoData coData = new CoData();
         CoMgt coMgt = new CoMgt();

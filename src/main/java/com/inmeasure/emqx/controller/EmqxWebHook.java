@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
-import org.yeauty.annotation.PathVariable;
+
 
 /**
  * 负责接收EMQX服务器端的数据
@@ -29,7 +29,6 @@ public class EmqxWebHook {
      */
     @PostMapping("/tempAndHum")
     public String getTempAndHum(@RequestBody TempAndHum tempAndHum){
-        log.info("接收到EMQX服务器数据："+ tempAndHum.toString());
         //发送事件，让监听器获取后进行数据存储、webSocket
         publisher.publishEvent(new TempAndHumEvent(this , tempAndHum));
         return null;
@@ -42,7 +41,6 @@ public class EmqxWebHook {
      */
     @PostMapping("/airPr")
     public String getAirPr(@RequestBody AirPr airPr){
-        log.info("接收到EMQX服务器数据："+ airPr.toString());
         //发送事件，让监听器获取后进行数据存储、webSocket
         publisher.publishEvent(new AirprEvent(this , airPr));
         return null;
@@ -55,7 +53,6 @@ public class EmqxWebHook {
      */
     @PostMapping("/co")
     public String getCo(@RequestBody Co co){
-        log.info("接收到EMQX服务器数据："+ co.toString());
         //发送事件，让监听器获取后进行数据存储、webSocket
         publisher.publishEvent(new CoEvent(this , co));
         return null;

@@ -22,8 +22,6 @@ public class TempAndHumListener4Push implements ApplicationListener<TempAndHumEv
     @Async("taskExecutor")
     public void onApplicationEvent(TempAndHumEvent event) {
         TempAndHum tempAndHum = event.getTempAndHum();
-        String s = tempAndHum.toString();
-        log.info("推送消息监听器监听到消息：" + s);
         TempHumWebSocketService.sendInfo(tempAndHum);
     }
 }

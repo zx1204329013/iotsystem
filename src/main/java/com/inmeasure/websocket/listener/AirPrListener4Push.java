@@ -25,8 +25,6 @@ public class AirPrListener4Push implements ApplicationListener<AirprEvent> {
     @Async("taskExecutor")
     public void onApplicationEvent(AirprEvent event) {
         AirPr airPr = event.getAirPr();
-        String s = airPr.toString();
-        log.info("气压传感器器消息推送监听器：" + s);
         AirPrWebSocketService.sendInfo(airPr);
     }
 }
