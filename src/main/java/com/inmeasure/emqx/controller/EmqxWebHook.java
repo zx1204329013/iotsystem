@@ -1,8 +1,10 @@
 package com.inmeasure.emqx.controller;
 
+import com.inmeasure.common.event.AcEvent;
 import com.inmeasure.common.event.AirprEvent;
 import com.inmeasure.common.event.CoEvent;
 import com.inmeasure.common.event.TempAndHumEvent;
+import com.inmeasure.emqx.domain.Ac;
 import com.inmeasure.emqx.domain.AirPr;
 import com.inmeasure.emqx.domain.Co;
 import com.inmeasure.emqx.domain.TempAndHum;
@@ -55,6 +57,18 @@ public class EmqxWebHook {
     public String getCo(@RequestBody Co co){
         //发送事件，让监听器获取后进行数据存储、webSocket
         publisher.publishEvent(new CoEvent(this , co));
+        return null;
+    }
+
+    /**
+     * 获取加速度传感器数据
+     * @param ac
+     * @return
+     */
+    @PostMapping("/ac")
+    public String getAc(@RequestBody Ac ac){
+        //发送事件，让监听器获取后进行数据存储、webSocket
+        publisher.publishEvent(new AcEvent(this , ac));
         return null;
     }
 }
