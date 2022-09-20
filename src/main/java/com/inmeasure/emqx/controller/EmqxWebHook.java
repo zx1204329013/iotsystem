@@ -89,4 +89,16 @@ public class EmqxWebHook {
         publisher.publishEvent(new Co2AndVocEvent(this , co2AndVoc));
         return null;
     }
+
+    /**
+     * 获取风速传感器数据
+     * @param ws
+     * @return
+     */
+    @PostMapping("/ws")
+    public String getCo2AndVoc(@RequestBody Ws ws){
+        //发送事件，让监听器获取后进行数据存储、webSocket
+        publisher.publishEvent(new WsEvent(this , ws));
+        return null;
+    }
 }
